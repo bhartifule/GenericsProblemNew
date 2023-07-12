@@ -1,24 +1,34 @@
 package com.bridglaz.generics;
 
-public class generics {
+public class generics <T extends Comparable>  {
+    T[] array;
 
-    static void max_variables(Float num1, Float num2, Float num3) {
-        if(num1.compareTo(num2) > 0){
-            if(num1.compareTo(num3) > 0){
-                System.out.println( num1 + " is Maximum of three float numbers ");
-            }else {
-                System.out.println( num3 + " is Maximum of three float numbers ");
-            }
-        }else{
-            if(num2.compareTo(num3) > 0){
-                System.out.println( num2 + " is Maximum of three float numbers ");
-            }else{
-                System.out.println( num3 + " is Maximum of three float numbers ");
+    generics(T[] arr1) {
+        this.array = arr1;
+    }
+
+    void max_variables(){
+        T largest = this.array[0];
+        for (int i=0; i<this.array.length; i++){
+            if(this.array[i].compareTo(largest) > 0){
+                largest = this.array[i];
+                this.array[i] = largest;
             }
         }
+        System.out.println(" Largest element in the array is " + largest);
     }
 
     public static void main(String[] args) {
-        max_variables(1.3f,1.5f,0.2f);
+        Integer[] int_arr = {14,77,11,1,56};
+        generics <Integer> obj1 = new generics(int_arr);
+        obj1.max_variables();
+
+        String[] st_arr = {"Banana", "Apple", "Orange","Pineapple","Greps"};
+        generics <String> obj2 = new generics(st_arr);
+        obj2.max_variables();
+
+        Float[] float_arr = {25.1f, 4.3f, 7.1f};
+        generics <Float> obj3 = new generics(float_arr);
+        obj3.max_variables();
     }
     }
